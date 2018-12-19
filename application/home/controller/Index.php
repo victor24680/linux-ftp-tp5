@@ -20,7 +20,7 @@ class Index extends Controller
         if($info){
             //获取完整的文件路径：./Uploads/tempImg/test/top/20181219/3e8089762b811dc8bbdf7d5b1935ba5f.png
             $file->getFilePathName();
-            //返回新的文件名
+            //返回新的文件名：3e8089762b811dc8bbdf7d5b1935ba5f.png
             $file->getNewFileName();
         }
 

@@ -81,7 +81,6 @@ class File extends SplFileObject
         if ($is_ftp_driver == 1) {
             $this->setDriver();
         }
-
     }
 
     /**
@@ -112,7 +111,7 @@ class File extends SplFileObject
      * @author:victor
      * 设定自定义子路径：必须以“目录名/”格式，如:img/
      */
-    public function setSubSavePath($path)
+    public function setSubSavePath($path='')
     {
         if (!empty($path)) {
             $this->subSavePath = $path;
@@ -138,12 +137,10 @@ class File extends SplFileObject
 
             return false;
         }
-
         //验证尺寸大小规则
         if (!$this->check()) {
             return false;
         }
-
         /**
          * ["name"] => string(22) "xxxsaj.png"
          * ["type"] => string(9) "image/png"
@@ -173,8 +170,7 @@ class File extends SplFileObject
         }
         //重命名文件名
         $rename = $this->getReFileName($info['name']);
-
-        $this->filePathName=$this->rootPath.$sub_dir.$rename;
+        $this->filePathName = $this->rootPath . $sub_dir . $rename;
         //移动文件
         $data = [
             'savepath' => $sub_dir,
@@ -182,8 +178,6 @@ class File extends SplFileObject
             'tmp_name' => $this->info['tmp_name'],
             'type'     => $this->info['type'],
         ];
-
-
         if (!$this->uploader->save($data)) {
             $this->error = '远程移动文件失败';
 
@@ -195,12 +189,13 @@ class File extends SplFileObject
 
     /**
      * @author:victor;
+     *
      * @param $name 原来文件名
      * @param string $self_name 自定义文件名-【规则：自定义】
      *
      * @return string
      */
-    public function getReFileName($name, $self_name = '')
+    protected function getReFileName($name, $self_name = '')
     {
         //后去文件名的后缀
         $ext = pathinfo($name, PATHINFO_EXTENSION);
@@ -220,6 +215,15 @@ class File extends SplFileObject
     public function getFilePathName()
     {
         return $this->filePathName;
+    }
+
+    /**
+     * 返回新的文件名
+     * @return mixed
+     */
+    public function getNewFileName()
+    {
+        return $this->renameFileName;
     }
 
     /**
