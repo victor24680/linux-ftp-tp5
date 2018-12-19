@@ -51,7 +51,7 @@ class Ftp
         $this->config = array_merge($this->config, $config);
         /* 登录FTP服务器 */
         if (!$this->login()) {
-            E($this->error);
+            $this->error = '上传根目录不存在!!';
         }
     }
 
