@@ -4,7 +4,7 @@ namespace app\home\controller;
 
 use think\Controller;
 use think\facade\Request;
-
+use think\Upload;
 class Index extends Controller
 {
     public function upload()
@@ -25,5 +25,9 @@ class Index extends Controller
         }
 
         //备注：以上只使用于ftp文件服务器上传,本地上传请使用自带的上传程序；
+
+        //普通上传类【非TP5整合方法-TP3】
+        $upload=new Upload();
+        $upload->upload();
     }
 }
